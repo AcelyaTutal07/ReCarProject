@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[CARS] (
+[CarId] INT NOT NULL,
+[ColorId] INT NOT NULL,
+[BrandId] INT NOT NULL,
+[ModeLYear] DATE NOT NULL,
+[DailyPrice] DECİMAL(18) NOT NULL,
+[Description] NVARCHAR (MAX) NOT NULL
+);
