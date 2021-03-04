@@ -1,14 +1,15 @@
 ﻿using Core.DataAccess.EntitiyFramework;
-using Core.Entities.Utilities;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataAccess.Concrete.EntityFrameWork
 {
-    public class EfRentalsDal : EfEntityRepositoryBase<Rental, ReCarContext>, IRentalDal
+    public class EfRentalDal : EfEntityRepositoryBase<Rental, ReCarContext>, IRentalDal
     {
         public List<RentalDetailDto> GetRentalDetails()
         {
@@ -20,12 +21,12 @@ namespace DataAccess.Concrete.EntityFrameWork
                              join cu in context.Customers
                              on r.CustomerId equals cu.CustomerId
                              join u in context.Users
-                             on cu.UserId equals u.UserId
+                             on cu.UserId equals u.Id
                              select new RentalDetailDto
                              {
                                  RentalId = r.RentalId,
                                  CarId = ca.CarId,
-                                 CarName = ca.CarName,
+                                 CarName = ca.Description,
                                  CustomerName = cu.CompanyName,
                                  RentDate = r.RentDate,
                                  ReturnDate = r.ReturnDate,
@@ -38,6 +39,8 @@ namespace DataAccess.Concrete.EntityFrameWork
             //JOIN ifadesinde kullanılan equals anahtarı, eşitliği karşılaştırmak için kullanılmıştır.
             // equals yerine "==" şeklinde bir eşitlik kontrolü kullanamayız.
         }
+
+       
     }
 }
 

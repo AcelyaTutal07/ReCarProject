@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.EntityFrameWork
 {
-    public class EfBrandDal : EfEntityRepositoryBase<Brand, ReCarDbContext>, IBrandDal
+    public class EfBrandDal : EfEntityRepositoryBase<Brand, ReCarContext>, IBrandDal
 
     {
        

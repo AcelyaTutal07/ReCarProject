@@ -15,6 +15,15 @@ namespace Business.Constants
         public static string Updated = "Ürün güncellendi.";
         public static string ProductList = "Ürün listelendi.";
         public static string MaintenanceTime = "Sistem Bakımda";
-       
+        public static string AuthorizationDenied = "Yetkiniz yok.";
+        public static string UserRegistered = "Kullanıcı Kayıt Başarılı!";
+        public static string UserNotFound = "Kullanıcı Bulunamadı!";
+        public static string PasswordError = "Şifre Hatalı";
+        public static string SuccessfulLogin = "Giriş Başarılı";
+        public static string UserAlreadyExists = "Kullanıcı Mevcut";
+        public static string AccessTokenCreated = "Token Oluşturuldu";
+
+
+
     }
 }

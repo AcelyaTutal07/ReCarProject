@@ -1,20 +1,20 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using Core.Entities.Utilities;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Business.Concrete
 {
-   public class RentalsManager : IRentalService
+   public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
 
-        public RentalsManager(IRentalDal rentaldal)
+        public RentalManager(IRentalDal rentaldal)
         {
             _rentalDal = rentaldal;
         }
@@ -48,7 +48,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentId == id));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalId == id));
         }
 
         public IDataResult<List<Rental>> GetRentalCarId(int id)

@@ -39,7 +39,9 @@ namespace ConsoleUI
         Daha sonra iş katmanında İş kodlarını yazdığımız clasları oluşturuyoruz CarManager gibi bunlara service leri implement ediyoruz.
 
         Controller =  bizim uygulamamızı isteyenler nasıl istekte bulunabilirleri biz controller da yazıyoruz
-       
+        Cross Cutting Concerns : Log, Cache, Transaction(performans)
+    }
+        */
     }
 }
         

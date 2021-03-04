@@ -1,10 +1,16 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Concrete;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validations;
 using Core.Entities;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -18,9 +24,17 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
+        //korunan operasyonlar
+        //admin editor bunlar bizim claimlerimiz bizi korur
 
+        [SecuredOperation("car.add,admin")]
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
+            //business codes : iş kodları / iş ihtiyaçlarımıza uygunluktur
+            //validation : doğrulama kodu / eklemek istediğimiz nesnelerin yapılarını doğru olup olmadığını doğrular
+            //Add methodunu doğrula CarValidatora göre
+     
             _carDal.Add(car);
             return new SuccessResult(Messages.Added);
         }
@@ -33,6 +47,10 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
+            if (DateTime.Now.Hour == 03)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            }
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 

@@ -40,7 +40,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Updated);
         }
 
-        public IDataResult<List<Brand>> GeyAllByBrandId(int id)
+     
+
+        public IDataResult<List<Brand>> GetAllByBrandId(int id)
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(c => c.BrandId == id));
         }
