@@ -1,6 +1,9 @@
 using Business.Abstract;
 using Business.Concrete;
+using Core.DependecyResolvers;
+using Core.Extencsions;
 using Core.Utilities.Interceptors;
+using Core.Utilities.IoC;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFrameWork;
@@ -38,7 +41,8 @@ namespace WebAPI
             //services.AddSingleton<IBrandService, BrandManager>();
             //services.AddSingleton<IBrandDal, EfBrandDal>();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddCors();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -56,7 +60,10 @@ namespace WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
-
+            //buraya istediðim kadar modülleri de ekleyebilmek için yazdýk.
+            services.AddDependencyResolvers(new ICoreModule[] {
+            new CoreModule()
+            });
         }
 
 
@@ -67,6 +74,8 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => builder.WithOrigins("http://http://localhost:4200/").AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
