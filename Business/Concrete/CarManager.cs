@@ -66,7 +66,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
         }
 
-        public IDataResult<List<Car>> GetByModelYear(string year)
+        public IDataResult<List<Car>> GetByModelYear(int year)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ModelYear == year));
         }

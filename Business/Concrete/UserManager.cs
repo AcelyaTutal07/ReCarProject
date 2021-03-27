@@ -26,12 +26,21 @@ namespace Business.Concrete
 
         public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<User>>( _userDal.GetAll(), "Kulanıcılar Listelendi");
-        }
+            List<User> users = _userDal.GetAll();
+            if (users.Count == 0)
+            {
+                return new ErrorDataResult<List<User>>(Messages.GetErrorUserMessage);
+            }
+            else
+            {
+                return new SuccessDataResult<List<User>>(users, Messages.GetSuccessUserMessage);
+            }
+        
+    }
 
         public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<User>( _userDal.Get(u => u.Id == id));
+            return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == id));
         }
 
         [ValidationAspect(typeof(UserValidator))]
@@ -40,12 +49,14 @@ namespace Business.Concrete
             _userDal.Add(user);
             return new SuccessResult(Messages.Added);
         }
+
+
         [ValidationAspect(typeof(UserValidator))]
         public IResult Update(User user)
         {
             _userDal.Update(user);
 
-            return new SuccessResult(Messages.Updated);
+            return new SuccessResult(Messages.EditUserMessage);
 
         }
 
@@ -53,7 +64,7 @@ namespace Business.Concrete
         {
             _userDal.Delete(user);
 
-            return new SuccessResult(Messages.Deleted);
+            return new SuccessResult(Messages.DeleteUserMessage);
         }
 
         public List<OperationClaim> GetClaims(User user)
@@ -64,8 +75,15 @@ namespace Business.Concrete
 
         public IDataResult<User> GetByMail(string email)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
-
+            User user = _userDal.Get(p => p.Email.ToLower() == email.ToLower());
+            if (user == null)
+            {
+                return new ErrorDataResult<User>(Messages.GetErrorUserMessage);
+            }
+            else
+            {
+                return new SuccessDataResult<User>(user, Messages.GetSuccessUserMessage);
+            }
         }
     }
 }

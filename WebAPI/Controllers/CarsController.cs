@@ -95,7 +95,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpGet("getbymodelyear")]
-        public IActionResult GetByModelYear(string year)
+        public IActionResult GetByModelYear(int year)
         {
             var result = _carService.GetByModelYear(year);
             if (result.Success)

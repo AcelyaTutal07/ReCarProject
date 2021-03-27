@@ -34,23 +34,30 @@ namespace Business.Concrete
             carImage.ImagePath = FileHelper.Add(file);
             carImage.Date = DateTime.Now;
             _carImageDAL.Add(carImage);
-            return new SuccessResult();
+
+            return new SuccessResult(Messages.AddCarImageMessage);
         }
+
+
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Delete(CarImage carImage)
         {
             FileHelper.Delete(carImage.ImagePath);
             _carImageDAL.Delete(carImage);
-            return new SuccessResult();
+            return new SuccessResult(Messages.DeleteCarImageMessage);
         }
+
+
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
         {
             carImage.ImagePath = FileHelper.Update(_carImageDAL.Get(p => p.Id == carImage.Id).ImagePath, file);
             carImage.Date = DateTime.Now;
             _carImageDAL.Update(carImage);
-            return new SuccessResult();
+            return new SuccessResult(Messages.EditCarImageMessage);
         }
+
+
         [ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<CarImage> Get(int id)
         {
@@ -60,6 +67,8 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll());
         }
+
+
         [ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<List<CarImage>> GetImagesByCarId(int id)
         {
@@ -73,7 +82,7 @@ namespace Business.Concrete
             var carImagecount = _carImageDAL.GetAll(p => p.CarId == carid).Count;
             if (carImagecount >= 5)
             {
-                return new ErrorResults("Limit Aşıldı");
+                return new ErrorResults(Messages.AboveImageAddingLimit);
             }
 
             return new SuccessResult();

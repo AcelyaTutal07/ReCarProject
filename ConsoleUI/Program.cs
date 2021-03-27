@@ -63,7 +63,7 @@ namespace ConsoleUI
                       , car.CarId, car.BrandId, car.ColorId, car.ModelYear, car.DailyPrice, car.Description);
                 }
 
-                carManager.Add(new Car { BrandId = 2, ColorId = 3, ModelYear = "2003", DailyPrice = 60000, Description = "Güzel." });
+                carManager.Add(new Car { BrandId = 2, ColorId = 3, ModelYear = 2003, DailyPrice = 60000, Description = "Güzel." });
                 Console.WriteLine("*****************Mevcut Arabalarımız****************");
                 foreach (var car in carManager.GetAll().Data)
                 {
@@ -71,7 +71,7 @@ namespace ConsoleUI
                       , car.CarId, car.BrandId, car.ColorId, car.ModelYear, car.DailyPrice, car.Description);
                 }
 
-                carManager.Update(new Car { CarId = 5, BrandId = 3, ColorId = 3, ModelYear = "2007", DailyPrice = 60000, Description = "Güzel." });
+                carManager.Update(new Car { CarId = 5, BrandId = 3, ColorId = 3, ModelYear = 2007, DailyPrice = 60000, Description = "Güzel." });
                 Console.WriteLine("*****************Mevcut Arabalarımız****************");
                 foreach (var car in carManager.GetAll().Data)
                 {
@@ -79,7 +79,7 @@ namespace ConsoleUI
                       , car.CarId, car.BrandId, car.ColorId, car.ModelYear, car.DailyPrice, car.Description);
                 }
 
-                carManager.Delete(new Car { CarId = 5, BrandId = 3, ColorId = 3, ModelYear = "2007", DailyPrice = 60000, Description = "Güzel." });
+                carManager.Delete(new Car { CarId = 5, BrandId = 3, ColorId = 3, ModelYear = 2007, DailyPrice = 60000, Description = "Güzel." });
                 Console.WriteLine("*****************Mevcut Arabalarımı****************");
                 foreach (var car in carManager.GetAll().Data)
                 {
@@ -106,7 +106,7 @@ namespace ConsoleUI
                 foreach (var car in carManager.GetCarDetails().Data)
                 {
                     Console.WriteLine("Araba Id: {0}   Marka Id:{1}   Renk Id:{2}   Model Yılı: {3}  Fiyatı: {4} TL   Açıklama: {5}"
-                      , car.CarName, car.BrandName, car.ColorName, car.ModelYear, car.DailyPrice, car.Descriptions);
+                      , car.Descriptions, car.BrandName, car.ColorName, car.ModelYear, car.DailyPrice, car.Descriptions);
                 }
             }
 
